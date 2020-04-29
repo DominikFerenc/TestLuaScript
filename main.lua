@@ -25,7 +25,7 @@ function checkPinOutput(data)
 end
 
 function setNewFrame(button, data)
-  number = "nummber"
+  number = "numbertest"
   Error = "Erorrx1"
 
   if button == 1 then
