@@ -3,7 +3,6 @@ function getFrame()
   udp = socket.udp()
   if udp:setsockname("192.168.1.1", 2947) then
     print("Connected to HTTP server")
-    
     while true do
       data = udp:receivefrom()
       checkPinOutput(data)
@@ -40,14 +39,12 @@ end
 function sendNewFrame(newData)
   local socket = require("socket")
   udp = socket.udp()
-
   if udp:setsockname("", 80) then
     print ("Connected to host")
     udp:send(newData)
   else 
     print("Not connected to host")
   end
-
   print("New Frame: ", newData)
 end
 
