@@ -18,9 +18,11 @@ function getFrame()
 end
 
 function checkPinOutput(data)
-  button = os.execute("gpio.sh get DOUT1\n")
-  print("gpio button status:", button, "\n")
-  setNewFrame(button, data)
+  local handle = io.popen("gpio.sh get DOUT1")
+  local result = handle:read("*all")
+  handle:close()
+  print("gpio button status:", result, "\n")
+  setNewFrame(result, data)
 end
 
 function setNewFrame(button, data)
