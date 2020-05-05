@@ -8,7 +8,6 @@ function getFrame()
   
   if udp:setsockname(ip_address, port) then
     print("Connected to HTTP server")
-    
     while true do
       data = udp:receivefrom()
       checkPinOutput(data)
