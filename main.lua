@@ -1,7 +1,12 @@
+
 function getFrame()
   local socket = require("socket")
   udp = socket.udp()
-  if udp:setsockname("192.168.1.1", 2947) then
+
+  local ip_address = "192.168.1.1"
+  local port = 2947
+  
+  if udp:setsockname(ip_address, port) then
     print("Connected to HTTP server")
     
     while true do
@@ -21,7 +26,7 @@ end
 function checkPinOutput(data)
   local handle = io.popen("gpio.sh get DOUT1", 'r')
   local result_read = handle:read("*a")
-  handle:close()
+  handle:close() 
   whiteSpaceStringOutput(result_read, data)
 end
 
@@ -48,12 +53,15 @@ function setNewFrame(button, data)
 end
 
 function sendNewFrame(newData)
-  local socket = require("socket")
-  udp = socket.udp()
+  local socket_server = require("socket")
+  udp_sock = socket_server.udp()
 
-  if udp:setsockname("", 80) then
+  local ip_address = "127.0.0.1"
+  local port = 80
+
+  if udp:setsockname(ip_address, port) then
     print ("Connected to host")
-    udp:send(newData)
+    udp:sendto(newData, ip_address, port)
   else 
     print("Not connected to host")
   end
