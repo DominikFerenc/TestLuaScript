@@ -55,7 +55,7 @@ end
 function sendNewFrame(newData)
   local socket_server = require("socket")
   udp_sock = socket_server.udp()
-
+  
   local ip_address = "127.0.0.1"
   local port = 80
 
